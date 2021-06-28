@@ -30,9 +30,9 @@ cmovc   twoe32p977, %rbx
 
 // q + delta if carry
 addq    %rbx, %r8
-adcx    $0, %r9
-adcx    $0, %r10
-adcx    $0, %r11
+adcx    zero, %r9
+adcx    zero, %r10
+adcx    zero, %r11
 
 // set rbx = delta if carry
 xorq    %rbx, %rbx
@@ -40,9 +40,9 @@ cmovc   twoe32p977, %rbx
 
 // q + delta if carry
 addq    %rbx, %r8
-adcx    $0, %r9
-adcx    $0, %r10
-adcx    $0, %r11
+adcx    zero, %r9
+adcx    zero, %r10
+adcx    zero, %r11
 
 // q definitely reduced so move to return
 movq    %r8,   0(%rdi)
