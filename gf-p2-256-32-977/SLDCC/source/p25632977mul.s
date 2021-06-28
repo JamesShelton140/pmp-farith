@@ -36,6 +36,8 @@
 | EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                          |
 +-----------------------------------------------------------------------------+
 */
+; q = n * p
+; On call: %rdi = &q, %rsi = &n, %rdx = &p
 
 .p2align 5
 .globl gfp25632977mul

@@ -44,6 +44,9 @@
 
 #define gfp25632977sqr(x,y) gfp25632977nsqr(x,y,1)
 
+extern void gfp25632977add(gfe_p25632977 *, const gfe_p25632977 *, const gfe_p25632977 *);
+extern void gfp25632977sub(gfe_p25632977 *, const gfe_p25632977 *, const gfe_p25632977 *);
+extern void gfp25632977negate(gfe_p25632977 *, const gfe_p25632977 *);
 extern void gfp25632977mul(gfe_p25632977 *, const gfe_p25632977 *, const gfe_p25632977 *);
 extern void gfp25632977nsqr(gfe_p25632977 *, const gfe_p25632977 *, const uchar8);
 extern void gfp25632977makeunique(gfe_p25632977 *);
