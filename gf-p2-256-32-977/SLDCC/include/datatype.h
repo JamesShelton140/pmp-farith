@@ -50,5 +50,22 @@ typedef struct {
 }
 gfe_p25632977;
 
+//Group element of secp256k1 in affine coordinates (bitcoin-core/secp256k1)
+typedef struct {
+  gfe_p25632977 x;
+  gfe_p25632977 y;
+  int infinity; //indicates this represents the point at infinity
+}
+ge_secp256k1;
+
+//Group element of secp256k1 in jacobian coordinates (bitcoin-core/secp256k1)
+typedef struct {
+    gfe_p25632977 x; /* actual X: x/z^2 */
+    gfe_p25632977 y; /* actual Y: y/z^3 */
+    gfe_p25632977 z;
+    int infinity; //indicates this represents the point at infinity
+}
+gej_secp256k1;
+
 #endif
 
