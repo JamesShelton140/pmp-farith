@@ -41,6 +41,7 @@
 #include<math.h>
 #include"datatype.h"
 #include"p25632977.h"
+#include"secp256k1.h"
 #include"measure.h"
 
 #define change_input(x,y,z)  {x.l[0] = y.l[0]^z.l[0];}
@@ -67,15 +68,48 @@ int main() {
 
 	gfe_p25632977 t;
 	gfp25632977mul(&t,&e,&einv); gfp25632977makeunique(&t);
-	fprintf(FILE,"The cross check value is:\t"); print_elem(&t);  
+	fprintf(FILE,"The cross check value is:\t"); print_elem(&t);
 
-	fprintf(FILE,"Computing CPU-cycles. It will take some time. Please wait!\n\n");
-	MEASURE_TIME({gfp25632977mul(&t,&e,&e);change_input(e,t,e);});
-	fprintf(FILE,"CPU-cycles for a single field-multiplication is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
-	MEASURE_TIME({gfp25632977sqr(&t,&e);change_input(e,t,e);});
-	fprintf(FILE,"CPU-cycles for a single field-squaring is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
-	MEASURE_TIME({gfp25632977inv(&einv,&e);change_input(e,einv,e);});
-	fprintf(FILE,"CPU-cycles for a single field-inversion is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	gfe_p25632977 ne;
+	gfp25632977negate(&ne, &e);
+	fprintf(FILE,"The found negation is:\t\t"); print_elem(&einv);
+
+	gfe_p25632977 z;
+	gfp25632977add(&z, &ne, &e); gfp25632977makeunique(&z);
+	fprintf(FILE,"The cross check value is:\t"); print_elem(&z);
+
+	gfp25632977makeunique(&ne);
+	fprintf(FILE,"The reduced negation is:\t\t"); print_elem(&einv);
+	gfp25632977add(&z, &ne, &e); gfp25632977makeunique(&z);
+	fprintf(FILE,"The cross check value for reduced is:\t"); print_elem(&z);
+
+	gfe_p25632977 x = {0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
+	gfe_p25632977 y = {0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
+	ge_secp256k1 G = {x, y, 0};
+
+	fprintf(FILE,"The point is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(G->x);
+	fprintf(FILE,"y:\t\t"); print_elem(G->y);
+
+	gej_secp256k1 GGj;
+	secp256k1double(&GGj, &G);
+	fprintf(FILE,"The doubled point in projective coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(GGj->x);
+	fprintf(FILE,"y:\t\t"); print_elem(GGj->y);
+
+	ge_secp256k1 GG;
+	secp256k1_ge_from_gej(&GG, &GGj);
+	fprintf(FILE,"The doubled point in affine coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(GG->x);
+	fprintf(FILE,"y:\t\t"); print_elem(GG->y);
+
+	// fprintf(FILE,"Computing CPU-cycles. It will take some time. Please wait!\n\n");
+	// MEASURE_TIME({gfp25632977mul(&t,&e,&e);change_input(e,t,e);});
+	// fprintf(FILE,"CPU-cycles for a single field-multiplication is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// MEASURE_TIME({gfp25632977sqr(&t,&e);change_input(e,t,e);});
+	// fprintf(FILE,"CPU-cycles for a single field-squaring is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// MEASURE_TIME({gfp25632977inv(&einv,&e);change_input(e,einv,e);});
+	// fprintf(FILE,"CPU-cycles for a single field-inversion is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
 	return 0;
 }
