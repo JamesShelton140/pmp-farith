@@ -88,20 +88,20 @@ int main() {
 	ge_secp256k1 G = {x, y, 0};
 
 	fprintf(FILE,"The point is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(G.x);
-	fprintf(FILE,"y:\t\t"); print_elem(G.y);
+	fprintf(FILE,"x:\t\t"); print_elem(&G.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&G.y);
 
 	gej_secp256k1 GGj;
 	secp256k1double(&GGj, &G);
 	fprintf(FILE,"The doubled point in projective coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(GGj.x);
-	fprintf(FILE,"y:\t\t"); print_elem(GGj.y);
+	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
 
 	ge_secp256k1 GG;
 	secp256k1_ge_from_gej(&GG, &GGj);
 	fprintf(FILE,"The doubled point in affine coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(GG.x);
-	fprintf(FILE,"y:\t\t"); print_elem(GG.y);
+	fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
 
 	// fprintf(FILE,"Computing CPU-cycles. It will take some time. Please wait!\n\n");
 	// MEASURE_TIME({gfp25632977mul(&t,&e,&e);change_input(e,t,e);});
