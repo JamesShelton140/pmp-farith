@@ -2,8 +2,8 @@
 // On call: %rdi = &q, %rsi = &n, %rdx = &p
 
 .p2align 5
-.globl gfp25632977mul
-gfp25632977mul:
+.globl gfp25632977sub
+gfp25632977sub:
 
 push    %rbp
 push    %rbx
