@@ -72,14 +72,14 @@ int main() {
 
 	gfe_p25632977 ne;
 	gfp25632977negate(&ne, &e);
-	fprintf(FILE,"The found negation is:\t\t"); print_elem(&einv);
+	fprintf(FILE,"The found negation is:\t\t"); print_elem(&ne);
 
 	gfe_p25632977 z;
 	gfp25632977add(&z, &ne, &e); gfp25632977makeunique(&z);
 	fprintf(FILE,"The cross check value is:\t"); print_elem(&z);
 
 	gfp25632977makeunique(&ne);
-	fprintf(FILE,"The reduced negation is:\t\t"); print_elem(&einv);
+	fprintf(FILE,"The reduced negation is:\t\t"); print_elem(&ne);
 	gfp25632977add(&z, &ne, &e); gfp25632977makeunique(&z);
 	fprintf(FILE,"The cross check value for reduced is:\t"); print_elem(&z);
 
