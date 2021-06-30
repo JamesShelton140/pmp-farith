@@ -25,7 +25,7 @@ adcx    16(%rsi), %r10
 adcx    24(%rsi), %r11
 
 // set rbx = delta if carry
-xorq    %rbx, %rbx
+movq    zero, %rbx
 cmovc   twoe32p977, %rbx
 
 // q + delta if carry
@@ -35,7 +35,7 @@ adcx    zero, %r10
 adcx    zero, %r11
 
 // set rbx = delta if carry
-xorq    %rbx, %rbx
+movq    zero, %rbx
 cmovc   twoe32p977, %rbx
 
 // q + delta if carry

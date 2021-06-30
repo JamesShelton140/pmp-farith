@@ -25,7 +25,7 @@ sbbq    16(%rdx), %r10
 sbbq    24(%rdx), %r11
 
 // set rbx = delta if carry
-xorq    %rbx, %rbx
+movq    zero, %rbx
 cmovc   twoe32p977, %rbx
 
 // q - delta if carry
@@ -35,7 +35,7 @@ sbbq    zero, %r10
 sbbq    zero, %r11
 
 // set rbx = delta if carry
-xorq    %rbx, %rbx
+movq    zero, %rbx
 cmovc   twoe32p977, %rbx
 
 // q - delta if carry
