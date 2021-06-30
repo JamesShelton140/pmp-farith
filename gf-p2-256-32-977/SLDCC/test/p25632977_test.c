@@ -103,13 +103,17 @@ int main() {
 	fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
 	fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
 
-	// fprintf(FILE,"Computing CPU-cycles. It will take some time. Please wait!\n\n");
-	// MEASURE_TIME({gfp25632977mul(&t,&e,&e);change_input(e,t,e);});
-	// fprintf(FILE,"CPU-cycles for a single field-multiplication is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
-	// MEASURE_TIME({gfp25632977sqr(&t,&e);change_input(e,t,e);});
-	// fprintf(FILE,"CPU-cycles for a single field-squaring is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
-	// MEASURE_TIME({gfp25632977inv(&einv,&e);change_input(e,einv,e);});
-	// fprintf(FILE,"CPU-cycles for a single field-inversion is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	fprintf(FILE,"Computing CPU-cycles. It will take some time. Please wait!\n\n");
+	MEASURE_TIME({gfp25632977mul(&t,&e,&e);change_input(e,t,e);});
+	fprintf(FILE,"CPU-cycles for a single field-multiplication is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	MEASURE_TIME({gfp25632977sqr(&t,&e);change_input(e,t,e);});
+	fprintf(FILE,"CPU-cycles for a single field-squaring is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	MEASURE_TIME({gfp25632977inv(&einv,&e);change_input(e,einv,e);});
+	fprintf(FILE,"CPU-cycles for a single field-inversion is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	MEASURE_TIME({gfp25632977add(&t,&e,&e);change_input(e,t,e);});
+	fprintf(FILE,"CPU-cycles for a single field-addition is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	MEASURE_TIME({secp256k1double(&GGj, &G);});
+	fprintf(FILE,"CPU-cycles for a single point-double is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
 	return 0;
 }

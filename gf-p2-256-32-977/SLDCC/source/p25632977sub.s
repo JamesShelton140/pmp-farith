@@ -12,13 +12,13 @@ push    %r13
 push    %r14
 push    %r15
 
-// Move p into registers
+// Move n into registers
 movq    0(%rsi), %r8
 movq    8(%rsi), %r9
 movq    16(%rsi), %r10
 movq    24(%rsi), %r11
 
-// n + p
+// n - p
 subq    0(%rsi), %r8
 sbbq    8(%rsi), %r9
 sbbq    16(%rsi), %r10
@@ -28,21 +28,21 @@ sbbq    24(%rsi), %r11
 xorq    %rbx, %rbx
 cmovc   twoe32p977, %rbx
 
-// q + delta if carry
-addq    %rbx, %r8
-adcx    zero, %r9
-adcx    zero, %r10
-adcx    zero, %r11
+// q - delta if carry
+subq    %rbx, %r8
+sbbq    zero, %r9
+sbbq    zero, %r10
+sbbq    zero, %r11
 
 // set rbx = delta if carry
 xorq    %rbx, %rbx
 cmovc   twoe32p977, %rbx
 
-// q + delta if carry
-addq    %rbx, %r8
-adcx    zero, %r9
-adcx    zero, %r10
-adcx    zero, %r11
+// q - delta if carry
+subq    %rbx, %r8
+sbbq    zero, %r9
+sbbq    zero, %r10
+sbbq    zero, %r11
 
 // q definitely reduced so move to return
 movq    %r8,   0(%rdi)
