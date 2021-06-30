@@ -125,18 +125,18 @@ int main() {
 	y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
 	G = (ge_secp256k1){x, y, 0};
 	
-	secp256k1doublesub(&GGj, &G);
-	fprintf(FILE,"The (sub) doubled point in projective coords is:\n"); 
+	secp256k1doublebernstein(&GGj, &G);
+	fprintf(FILE,"The (bernstein) doubled point in projective coords is:\n"); 
 	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
 	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
 
 	secp256k1_ge_from_gej(&GG, &GGj);
-	fprintf(FILE,"The (sub) doubled point in affine coords is:\n"); 
+	fprintf(FILE,"The (bernstein) doubled point in affine coords is:\n"); 
 	fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
 	fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
 	
-	MEASURE_TIME({secp256k1doublesub(&GGj, &G);});
-	fprintf(FILE,"CPU-cycles for a single point-double with sub is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	MEASURE_TIME({secp256k1doublebernstein(&GGj, &G);});
+	fprintf(FILE,"CPU-cycles for a single point-double (bernstein) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
 	
 	return 0;
