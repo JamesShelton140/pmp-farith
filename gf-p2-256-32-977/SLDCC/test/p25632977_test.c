@@ -141,7 +141,7 @@ int main() {
 	// Test Jacobian point double algorithm
 	x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
 	y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
-	gfe_p25632977 z = {1,0,0,0};
+	z = (gfe_p25632977){1,0,0,0};
 	gej_secp256k1 Gj = {x, y, z, 0};
 	
 	secp256k1doublejacobian(&GGj, &Gj);
@@ -163,8 +163,9 @@ int main() {
 	z = (gfe_p25632977){1,0,0,0};
 	G = (ge_secp256k1){x, y, 0};
 	Gj = (gej_secp256k1){x, y, z, 0};
+	ge_secp256k1 G2 = G;
 
-	secp256k1add(&GGj, &G, &G);
+	secp256k1add(&GGj, &G, &G2);
 	fprintf(FILE,"The added point in projective coords is:\n"); 
 	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
 	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
