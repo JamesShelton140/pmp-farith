@@ -6,11 +6,10 @@
 void secp256k1_ge_from_gej(ge_secp256k1 *, gej_secp256k1 *);
 void secp256k1_gej_from_ge(gej_secp256k1 *, ge_secp256k1 *);
 
-void secp256k1add(ge_secp256k1 *, const ge_secp256k1 *, const ge_secp256k1 *);
-void secp256k1double(gej_secp256k1 *, const ge_secp256k1 *);
-
-void secp256k1doublebernstein(gej_secp256k1 *, const ge_secp256k1 *);
-
+void secp256k1add(gej_secp256k1 *, const ge_secp256k1 *, const ge_secp256k1 *);
+void secp256k1addjacobian(gej_secp256k1 *, const gej_secp256k1 *, const gej_secp256k1 *);
+void secp256k1double(gej_secp256k1 *, const ge_secp256k1 *);void secp256k1doublebernstein(gej_secp256k1 *, const ge_secp256k1 *);
+void secp256k1doublejacobian(gej_secp256k1 *, const gej_secp256k1 *);
 void secp256k1scalermult(ge_secp256k1 *, const gfe_p25632977 *, const ge_secp256k1 *);
 
 //                   sigr           , sigs           , privkey              , message              , nonce

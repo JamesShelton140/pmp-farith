@@ -120,24 +120,75 @@ int main() {
 	MEASURE_TIME({secp256k1double(&GGj, &G);});
 	fprintf(FILE,"CPU-cycles for a single point-double is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
-	//reset G
+	// Test Bernstein-Lange point double algorithm
+	// x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
+	// y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
+	// G = (ge_secp256k1){x, y, 0};
+	
+	// secp256k1doublebernstein(&GGj, &G);
+	// fprintf(FILE,"The (bernstein) doubled point in projective coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
+
+	// secp256k1_ge_from_gej(&GG, &GGj);
+	// fprintf(FILE,"The (bernstein) doubled point in affine coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
+	
+	// MEASURE_TIME({secp256k1doublebernstein(&GGj, &G);});
+	// fprintf(FILE,"CPU-cycles for a single point-double (bernstein) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+
+	// Test Jacobian point double algorithm
 	x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
 	y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
-	G = (ge_secp256k1){x, y, 0};
+	gfe_p25632977 z = {1,0,0,0};
+	gej_secp256k1 Gj = {x, y, z, 0};
 	
-	secp256k1doublebernstein(&GGj, &G);
-	fprintf(FILE,"The (bernstein) doubled point in projective coords is:\n"); 
+	secp256k1doublejacobian(&GGj, &Gj);
+	fprintf(FILE,"The (jacobian) doubled point in projective coords is:\n"); 
 	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
 	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
 
 	secp256k1_ge_from_gej(&GG, &GGj);
-	fprintf(FILE,"The (bernstein) doubled point in affine coords is:\n"); 
+	fprintf(FILE,"The (jacobian) doubled point in affine coords is:\n"); 
 	fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
 	fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
 	
-	MEASURE_TIME({secp256k1doublebernstein(&GGj, &G);});
-	fprintf(FILE,"CPU-cycles for a single point-double (bernstein) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	MEASURE_TIME({secp256k1doublejacobian(&GGj, &Gj);});
+	fprintf(FILE,"CPU-cycles for a single point-double (jacobian) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
+	// Test point addition algorithm
+	x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
+	y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
+	z = (gfe_p25632977){1,0,0,0};
+	G = (ge_secp256k1){x, y, 0};
+	Gj = (gej_secp256k1){x, y, z, 0};
+
+	secp256k1add(&GGj, &G, &G);
+	fprintf(FILE,"The added point in projective coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
+
+	secp256k1_ge_from_gej(&GG, &GGj);
+	fprintf(FILE,"The added point in affine coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
+	
+	MEASURE_TIME({secp256k1add(&GGj, &G, &G);});
+	fprintf(FILE,"CPU-cycles for a single point-addition is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	
+	secp256k1addjacobian(&GGj, &Gj, &Gj);
+	fprintf(FILE,"The (jacobian) added point in projective coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
+
+	secp256k1_ge_from_gej(&GG, &GGj);
+	fprintf(FILE,"The (jacobian) added point in affine coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
+	
+	MEASURE_TIME({secp256k1addjacobian(&GGj, &Gj, &Gj);});
+	fprintf(FILE,"CPU-cycles for a single point-addition (jacobian) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
 	return 0;
 }
