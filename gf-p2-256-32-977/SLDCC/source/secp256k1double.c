@@ -67,13 +67,13 @@ void secp256k1doublesub(gej_secp256k1 *pp, const ge_secp256k1 *p) {
     gfp25632977sub(&pp->x, &l1_2, &ll2);
 
     /* y = l1 * (l2 - x3) - l3 */
-    // gfp25632977negate(&nl3, &l3);
     // gfp25632977negate(&nx, &pp->x);
     // gfp25632977add(&l2mx, &l2, &nx);
     gfp25632977sub(&l2mx, &l2, &pp->x);
     gfp25632977mul(&yp, &l1, &l2mx);
+    // gfp25632977negate(&nl3, &l3);
     // gfp25632977add(&pp->y, &yp, &nl3);
-    gfp25632977add(&pp->y, &yp, &l3);
+    gfp25632977sub(&pp->y, &yp, &l3);
 
     if(pp->z.l[0] == 0 && pp->z.l[1] == 0 && pp->z.l[2] == 0 && pp->z.l[3] == 0) {
         pp->infinity = 1;
