@@ -158,42 +158,40 @@ int main() {
 	fprintf(FILE,"CPU-cycles for a single point-double (jacobian) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
 	// Test point addition algorithm
+	ge_secp256k1 GGG;
+	gej_secp256k1 GGGj;
 	x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
 	y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
 	z = (gfe_p25632977){1,0,0,0};
 	G = (ge_secp256k1){x, y, 0};
 	Gj = (gej_secp256k1){x, y, z, 0};
-	ge_secp256k1 G2 = G;
-
-	fprintf(FILE,"The point is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&G.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&G.y);
-	fprintf(FILE,"y:\t\t"); print_elem(&Gj.z);
-
-	secp256k1add(&GGj, &G, &G2);
-	fprintf(FILE,"The added point in projective coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
-
+	secp256k1double(&GGj, &G);
 	secp256k1_ge_from_gej(&GG, &GGj);
+
+	secp256k1add(&GGGj, &G, &GG);
+	fprintf(FILE,"The added point in projective coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&GGGj.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GGGj.y);
+
+	secp256k1_ge_from_gej(&GGG, &GGGj);
 	fprintf(FILE,"The added point in affine coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
+	fprintf(FILE,"x:\t\t"); print_elem(&GGG.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GGG.y);
 	
-	MEASURE_TIME({secp256k1add(&GGj, &G, &G);});
+	MEASURE_TIME({secp256k1add(&GGGj, &G, &GG);});
 	fprintf(FILE,"CPU-cycles for a single point-addition is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
-	secp256k1addjacobian(&GGj, &Gj, &Gj);
+	secp256k1addjacobian(&GGGj, &Gj, &GGj);
 	fprintf(FILE,"The (jacobian) added point in projective coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
+	fprintf(FILE,"x:\t\t"); print_elem(&GGGj.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GGGj.y);
 
-	secp256k1_ge_from_gej(&GG, &GGj);
+	secp256k1_ge_from_gej(&GGG, &GGGj);
 	fprintf(FILE,"The (jacobian) added point in affine coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
+	fprintf(FILE,"x:\t\t"); print_elem(&GGG.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GGG.y);
 	
-	MEASURE_TIME({secp256k1addjacobian(&GGj, &Gj, &Gj);});
+	MEASURE_TIME({secp256k1addjacobian(&GGGj, &Gj, &GGj);});
 	fprintf(FILE,"CPU-cycles for a single point-addition (jacobian) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
 	return 0;
