@@ -19,10 +19,10 @@ movq    16(%rsi), %r10
 movq    24(%rsi), %r11
 
 // n - p
-subq    0(%rsi), %r8
-sbbq    8(%rsi), %r9
-sbbq    16(%rsi), %r10
-sbbq    24(%rsi), %r11
+subq    0(%rdx), %r8
+sbbq    8(%rdx), %r9
+sbbq    16(%rdx), %r10
+sbbq    24(%rdx), %r11
 
 // set rbx = delta if carry
 xorq    %rbx, %rbx

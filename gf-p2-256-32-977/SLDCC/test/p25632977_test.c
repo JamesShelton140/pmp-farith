@@ -108,12 +108,36 @@ int main() {
 	fprintf(FILE,"CPU-cycles for a single field-multiplication is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	MEASURE_TIME({gfp25632977sqr(&t,&e);change_input(e,t,e);});
 	fprintf(FILE,"CPU-cycles for a single field-squaring is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
-	MEASURE_TIME({gfp25632977inv(&einv,&e);change_input(e,einv,e);});
-	fprintf(FILE,"CPU-cycles for a single field-inversion is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	//MEASURE_TIME({gfp25632977inv(&einv,&e);change_input(e,einv,e);});
+	//fprintf(FILE,"CPU-cycles for a single field-inversion is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	MEASURE_TIME({gfp25632977add(&t,&e,&e);change_input(e,t,e);});
 	fprintf(FILE,"CPU-cycles for a single field-addition is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	MEASURE_TIME({gfp25632977sub(&t,&e,&e);change_input(e,t,e);});
+	fprintf(FILE,"CPU-cycles for a single field-subtraction is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	MEASURE_TIME({gfp25632977negate(&t,&e);change_input(e,t,e);});
+	fprintf(FILE,"CPU-cycles for a single field-negation is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	
 	MEASURE_TIME({secp256k1double(&GGj, &G);});
 	fprintf(FILE,"CPU-cycles for a single point-double is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	
+	//reset G
+	x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
+	y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
+	G = (ge_secp256k1){x, y, 0};
+	
+	secp256k1doublesub(&GGj, &G);
+	fprintf(FILE,"The (sub) doubled point in projective coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
+
+	secp256k1_ge_from_gej(&GG, &GGj);
+	fprintf(FILE,"The (sub) doubled point in affine coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
+	
+	MEASURE_TIME({secp256k1doublesub(&GGj, &G);});
+	fprintf(FILE,"CPU-cycles for a single point-double with sub is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	
 	
 	return 0;
 }
