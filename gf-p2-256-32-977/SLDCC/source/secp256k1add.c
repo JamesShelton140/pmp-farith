@@ -2,7 +2,7 @@
 #include "p25632977.h"
 
 void secp256k1add(gej_secp256k1 *pq, const ge_secp256k1 *p, const ge_secp256k1 *q) {
-    gfe_p25632977 l3, l6, l7, l8, l9, zzq, zzp, zzzq, zzzp, zpzq, ll6, ll3, l7ll3, twox3, lll3, l8lll3, l9l6, lastl;
+    gfe_p25632977 l3, l6, l7, l8, l9, ll6, ll3, l7ll3, twox3, lll3, l8lll3, l9l6, lastl;
 
     // l3 = xp - xq
     gfp25632977sub(&l3, &p->x, &q->x);

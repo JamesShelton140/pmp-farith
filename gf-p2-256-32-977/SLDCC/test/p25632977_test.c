@@ -165,6 +165,11 @@ int main() {
 	Gj = (gej_secp256k1){x, y, z, 0};
 	ge_secp256k1 G2 = G;
 
+	fprintf(FILE,"The point is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&G.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&G.y);
+	fprintf(FILE,"y:\t\t"); print_elem(&Gj.z);
+
 	secp256k1add(&GGj, &G, &G2);
 	fprintf(FILE,"The added point in projective coords is:\n"); 
 	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
