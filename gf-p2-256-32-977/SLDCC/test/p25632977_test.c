@@ -201,6 +201,22 @@ int main() {
 	fprintf(FILE,"CPU-cycles for a single point-addition (jacobian) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
 	return 0;
+
+	// Test scaler multiplication
+	x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
+	y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
+	G = (ge_secp256k1){x, y, 0};
+	gfe_p25632977 n = {3,0,0,0};
+
+	secp256k1scalermult(&Gj, &n, &G);
+
+	secp256k1_ge_from_gej(&G, &Gj);
+	fprintf(FILE,"The point [n]G in affine coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&G.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&G.y);
+
+	MEASURE_TIME({secp256k1scalermult(&Gj, &n, &G);});
+	fprintf(FILE,"CPU-cycles for a single point multiplication is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 }
 
 
