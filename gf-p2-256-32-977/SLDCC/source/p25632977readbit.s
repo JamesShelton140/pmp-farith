@@ -1,5 +1,5 @@
 // bit = n[bit]
-// On call: %rdi = &bit, %rsi = &n, %rdx = %limb
+// On call: %rdi = &bit, %rsi = &n, %rdx = limb
 
 .p2align 5
 .globl gfp25632977readbit
