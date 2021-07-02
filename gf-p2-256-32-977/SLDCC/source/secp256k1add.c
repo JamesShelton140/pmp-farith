@@ -26,7 +26,7 @@ void secp256k1add(gej_secp256k1 *pq, const ge_secp256k1 *p, const ge_secp256k1 *
     gfp25632977sub(&pq->x, &ll6, &l7ll3);
 
     // l9 = l7 * l3^2 - 2 * x3
-    gfp25632977mul(&twox3, &(gfe_p25632977){2,0,0,0}, &pq->x);
+    gfp25632977add(&twox3, &pq->x, &pq->x);
     gfp25632977sub(&l9, &l7ll3, &twox3);
 
     // y3 = (l9 * l6 - l8 * l3^3) * 2^-1
@@ -85,7 +85,7 @@ void secp256k1addjacobian(gej_secp256k1 *pq, const gej_secp256k1 *p, const gej_s
     gfp25632977sub(&pq->x, &ll6, &l7ll3);
 
     // l9 = l7 * l3^2 - 2 * x3
-    gfp25632977mul(&twox3, &(gfe_p25632977){2,0,0,0}, &pq->x);
+    gfp25632977add(&twox3, &pq->x, &pq->x);
     gfp25632977sub(&l9, &l7ll3, &twox3);
 
     // y3 = (l9 * l6 - l8 * l3^3) * 2^-1

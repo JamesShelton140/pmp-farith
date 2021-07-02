@@ -83,6 +83,7 @@ int main() {
 	gfp25632977add(&z, &ne, &e); gfp25632977makeunique(&z);
 	fprintf(FILE,"The cross check value for reduced is:\t"); print_elem(&z);
 
+	// Test affine point double algorithm
 	gfe_p25632977 x = {0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
 	gfe_p25632977 y = {0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
 	ge_secp256k1 G = {x, y, 0};
@@ -126,22 +127,22 @@ int main() {
 	fprintf(FILE,"CPU-cycles for a single point-conversion to affine is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
 	// Test Bernstein-Lange point double algorithm
-	// x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
-	// y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
-	// G = (ge_secp256k1){x, y, 0};
+	x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
+	y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
+	G = (ge_secp256k1){x, y, 0};
 	
-	// secp256k1doublebernstein(&GGj, &G);
-	// fprintf(FILE,"The (bernstein) doubled point in projective coords is:\n"); 
-	// fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
-	// fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
+	secp256k1doublebernstein(&GGj, &G);
+	fprintf(FILE,"The (bernstein) doubled point in projective coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
 
-	// secp256k1_ge_from_gej(&GG, &GGj);
-	// fprintf(FILE,"The (bernstein) doubled point in affine coords is:\n"); 
-	// fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
-	// fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
+	secp256k1_ge_from_gej(&GG, &GGj);
+	fprintf(FILE,"The (bernstein) doubled point in affine coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
 	
-	// MEASURE_TIME({secp256k1doublebernstein(&GGj, &G);});
-	// fprintf(FILE,"CPU-cycles for a single point-double (bernstein) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	MEASURE_TIME({secp256k1doublebernstein(&GGj, &G);});
+	fprintf(FILE,"CPU-cycles for a single point-double (bernstein) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 
 	// Test Jacobian point double algorithm
 	x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
