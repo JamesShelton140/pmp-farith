@@ -38,9 +38,9 @@
 
 INCDRS     = -I../include/
 
-SRCFLS = ../source/p25632977consts.s ../source/p25632977mul.s ../source/p25632977nsqr.s ../source/p25632977makeunique.s ../source/p25632977inv.c p25632977_test.c
+SRCFLS = ../source/p25632977consts.s ../source/p25632977mul.s ../source/p25632977add.s ../source/p25632977negate.s ../source/p25632977sub.s ../source/p25632977nsqr.s ../source/p25632977makeunique.s ../source/p25632977inv.c ../source/secp256k1add.c ../source/secp256k1double.c ../source/secp256k1ecdsa.c ../source/secp256k1group.c ../source/secp256k1mladder.c ../source/p25632977readbit.s p25632977_test.c
          
-OBJFLS = ../source/p25632977consts.o ../source/p25632977mul.o ../source/p25632977nsqr.o ../source/p25632977makeunique.o ../source/p25632977inv.o p25632977_test.o
+OBJFLS = ../source/p25632977consts.o ../source/p25632977mul.o ../source/p25632977add.o ../source/p25632977negate.o ../source/p25632977sub.o ../source/p25632977nsqr.o ../source/p25632977makeunique.o ../source/p25632977inv.o ../source/secp256k1add.o ../source/secp256k1double.o ../source/secp256k1ecdsa.o ../source/secp256k1group.o ../source/secp256k1mladder.o ../source/p25632977readbit.o p25632977_test.o
 
 EXE    = p25632977_test
 
