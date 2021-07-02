@@ -199,8 +199,6 @@ int main() {
 	
 	MEASURE_TIME({secp256k1addjacobian(&GGGj, &Gj, &GGj);});
 	fprintf(FILE,"CPU-cycles for a single point-addition (jacobian) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
-	
-	return 0;
 
 	// Test scaler multiplication
 	x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
@@ -217,6 +215,8 @@ int main() {
 
 	MEASURE_TIME({secp256k1scalermult(&Gj, &n, &G);});
 	fprintf(FILE,"CPU-cycles for a single point multiplication is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+
+	return 0;
 }
 
 
