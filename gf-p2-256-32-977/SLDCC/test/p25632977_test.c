@@ -121,10 +121,10 @@ int main() {
 	MEASURE_TIME({secp256k1double(&GGj, &G);});
 	fprintf(FILE,"CPU-cycles for a single point-double is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 
-	MEASURE_TIME({secp256k1_gej_from_ge(&GGj, &G);});
-	fprintf(FILE,"CPU-cycles for a single point-conversion to projective is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
-	MEASURE_TIME({secp256k1_ge_from_gej(&G, &GGj);});
-	fprintf(FILE,"CPU-cycles for a single point-conversion to affine is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// MEASURE_TIME({secp256k1_gej_from_ge(&GGj, &G);});
+	// fprintf(FILE,"CPU-cycles for a single point-conversion to projective is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// MEASURE_TIME({secp256k1_ge_from_gej(&G, &GGj);});
+	// fprintf(FILE,"CPU-cycles for a single point-conversion to affine is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
 	// Test Bernstein-Lange point double algorithm
 	x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
