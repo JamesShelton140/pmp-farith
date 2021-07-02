@@ -12,7 +12,7 @@ push    %r13
 push    %r14
 push    %r15
 
-movq    &8, %rax
+movq    $8, %rax
 mulq    %rdx
 movq    (%rdi), %rcx
 movq    $1, (%rdi)
