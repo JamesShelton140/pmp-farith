@@ -170,7 +170,7 @@ int main() {
 	y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
 	z = (gfe_p25632977){1,0,0,0};
 	G = (ge_secp256k1){x, y, 0};
-	Gj = (gej_secp256k1){x, y, z, 0};
+	gej_secp256k1 Gj = {x, y, z, 0};
 	secp256k1double(&GGj, &G);
 	secp256k1_ge_from_gej(&GG, &GGj);
 
