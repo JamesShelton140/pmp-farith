@@ -54,7 +54,7 @@ extern void gfp25632977makeunique(gfe_p25632977 *);
 void gfp25632977inv(gfe_p25632977 *,const gfe_p25632977 *);
 void gfp25632977fltinv(gfe_p25632977 *,const gfe_p25632977 *);
 
-extern void gfp25632977readbit(int *, const gfe_p25632977 *);
+extern void gfp25632977readbit(int *, const gfe_p25632977 *, int *);
 
 static const gfe_p25632977 twoinv = {0xFFFFFFFF7FFFFE18, 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 0x7FFFFFFFFFFFFFFF} ;
 
