@@ -187,18 +187,18 @@ int main() {
 	MEASURE_TIME({secp256k1add(&GGGj, &G, &GG);});
 	fprintf(FILE,"CPU-cycles for a single point-addition is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
-	// secp256k1addjacobian(&GGGj, &Gj, &GGj);
-	// fprintf(FILE,"The (jacobian) added point in projective coords is:\n"); 
-	// fprintf(FILE,"x:\t\t"); print_elem(&GGGj.x);
-	// fprintf(FILE,"y:\t\t"); print_elem(&GGGj.y);
+	secp256k1addjacobian(&GGj, &Gj, &GGj);
+	fprintf(FILE,"The (jacobian) added point in projective coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
 
-	// secp256k1_ge_from_gej(&GGG, &GGGj);
-	// fprintf(FILE,"The (jacobian) added point in affine coords is:\n"); 
-	// fprintf(FILE,"x:\t\t"); print_elem(&GGG.x);
-	// fprintf(FILE,"y:\t\t"); print_elem(&GGG.y);
+	secp256k1_ge_from_gej(&GGG, &GGj);
+	fprintf(FILE,"The (jacobian) added point in affine coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&GGG.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&GGG.y);
 	
-	// MEASURE_TIME({secp256k1addjacobian(&GGGj, &Gj, &GGj);});
-	// fprintf(FILE,"CPU-cycles for a single point-addition (jacobian) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	MEASURE_TIME({secp256k1addjacobian(&GGj, &Gj, &GGj);});
+	fprintf(FILE,"CPU-cycles for a single point-addition (jacobian) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 
 	// Test scaler multiplication
 	x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
