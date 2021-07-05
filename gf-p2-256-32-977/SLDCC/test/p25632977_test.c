@@ -213,8 +213,8 @@ int main() {
 	fprintf(FILE,"x:\t\t"); print_elem(&G.x);
 	fprintf(FILE,"y:\t\t"); print_elem(&G.y);
 
-	MEASURE_TIME({secp256k1scalermult(&Gj, &n, &G);});
-	fprintf(FILE,"CPU-cycles for a single point multiplication is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// MEASURE_TIME({secp256k1scalermult(&Gj, &n, &G);});
+	// fprintf(FILE,"CPU-cycles for a single point multiplication is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 
 	return 0;
 }
