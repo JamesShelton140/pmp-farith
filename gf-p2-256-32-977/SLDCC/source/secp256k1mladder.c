@@ -1,5 +1,6 @@
 #include "secp256k1.h"
 #include "p25632977.h"
+#include <stdio.h>
 
 void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_secp256k1 *P) {
     gej_secp256k1 R0, R1;
