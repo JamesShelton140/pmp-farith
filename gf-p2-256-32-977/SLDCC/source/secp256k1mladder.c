@@ -15,15 +15,15 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
         R1.z = (gfe_p25632977){1,0,0,0};
     }
     
-
-    int bit, limb;
+    printf("\n\n\nstarting loop\n\n\n");
+    int i, bit, limb;
     uint64 mask, swap;
-    for (int i = 255; i >= 0; i--) {
+    for (i = 255; i >= 0; i--) {
         printf("i: %u\n",i);
         limb = i/64;printf("Limb: %u\n",limb);
         bit = i%64;printf("bit: %u\n",limb);
         mask = 1 << bit;printf("Mask: %16llX\n",mask);
-        swap = mask & n->l[limb];printf("swap: %16llX\n\n\n",swap);
+        swap = mask & n->l[limb];printf("swap: %16llX\n\n",swap);
         
         // gfp25632977readbit(&bit, n, limb);
 
