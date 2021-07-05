@@ -40,6 +40,14 @@ void secp256k1double(gej_secp256k1 *pp, const ge_secp256k1 *p) {
 void secp256k1doublejacobian(gej_secp256k1 *pp, const gej_secp256k1 *p) {
     gfe_p25632977 l1, l2, l3, x2, y2, y4, l1_2, xy2, ll2, l2mx, yp, yz;
 
+    if(p->infinity == 1) {
+        pp->x = p->x;
+        pp->y = p->y;
+        pp->z = p->z;
+        pp->infinity = p->infinity;
+        return;
+    }
+
     /* l1 = 3 * x2 */
     gfp25632977sqr(&x2, &p->x);
     gfp25632977mul(&l1, &(gfe_p25632977){3,0,0,0}, &x2);

@@ -2,6 +2,8 @@
 #include "p25632977.h"
 #include <stdio.h>
 
+void print_felem(const gfe_p25632977 *);
+
 void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_secp256k1 *P) {
     gej_secp256k1 R0, R1;
 
@@ -19,11 +21,10 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
     int i, bit, limb;
     uint64 mask, swap;
     for (i = 255; i >= 0; i--) {
-        printf("i: %u\n",i);
-        limb = i/64;printf("Limb: %u\n",limb);
-        bit = i%64;printf("bit: %u\n",limb);
-        mask = 1 << bit;printf("Mask: %16llX\n",mask);
-        swap = mask & n->l[limb];printf("swap: %16llX\n\n",swap);
+        limb = i/64;
+        bit = i%64;
+        mask = 1 << bit;
+        swap = mask & n->l[limb];
         
         // gfp25632977readbit(&bit, n, limb);
 
@@ -41,4 +42,13 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
     nP->z = R0.z;
     nP->infinity = R0.infinity;
 
+}
+
+void print_felem(const gfe_p25632977 *e){
+
+	uchar8  i;
+
+	for (i=NLIMBS-1; i>0; --i) 
+		printf("%16llX ",e->l[i]);
+	printf("%16llX \n\n",e->l[0]);
 }

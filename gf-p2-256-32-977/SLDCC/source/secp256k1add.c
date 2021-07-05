@@ -46,6 +46,22 @@ void secp256k1add(gej_secp256k1 *pq, const ge_secp256k1 *p, const ge_secp256k1 *
 void secp256k1addjacobian(gej_secp256k1 *pq, const gej_secp256k1 *p, const gej_secp256k1 *q) {
     gfe_p25632977 l1, l2, l3, l4, l5, l6, l7, l8, l9, zzq, zzp, zzzq, zzzp, zpzq, ll6, ll3, l7ll3, twox3, lll3, l8lll3, l9l6, lastl;
 
+    if(p->infinity == 1) {
+        pq->x = q->x;
+        pq->y = q->y;
+        pq->z = q->z;
+        pq->infinity = q->infinity;
+        return;
+    }
+
+    if(q->infinity == 1) {
+        pq->x = p->x;
+        pq->y = p->y;
+        pq->z = p->z;
+        pq->infinity = p->infinity;
+        return;
+    }
+
     // l1 = xp * zq^2
     gfp25632977sqr(&zzq, &q->z);
     gfp25632977mul(&l1, &p->x, &zzq);
