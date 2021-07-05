@@ -18,10 +18,11 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
     int bit, limb;
     uint64 mask, swap;
     for (int i = 255; i >= 0; i--) {
-        limb = i/64;
-        bit = i%64;
-        mask = 1 << bit;
-        swap = mask & n->l[limb];
+        printf("i: %u\n",i);
+        limb = i/64;printf("Limb: %u\n",limb);
+        bit = i%64;printf("bit: %u\n",limb);
+        mask = 1 << bit;printf("Mask: %16llX\n",mask);
+        swap = mask & n->l[limb];printf("swap: %16llX\n\n\n",swap);
         
         // gfp25632977readbit(&bit, n, limb);
 
@@ -34,6 +35,9 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
         }
     }
     
-    nP = &R0;
+    nP->x = R0.x;
+    nP->y = R0.y;
+    nP->z = R0.z;
+    nP->infinity = R0.infinity;
 
 }
