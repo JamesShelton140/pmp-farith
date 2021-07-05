@@ -173,6 +173,11 @@ int main() {
 	gej_secp256k1 Gj = {x, y, z, 0};
 	secp256k1double(&GGj, &G);
 	secp256k1_ge_from_gej(&GG, &GGj);
+	gej_secp256k1 inf;
+	x = (gfe_p25632977){0,0,0,0};
+	y = (gfe_p25632977){1,0,0,0};
+	z = (gfe_p25632977){0,0,0,0};
+	inf = (gej_secp256k1){x, y, z, 1};
 
 	secp256k1add(&GGGj, &G, &GG);
 	fprintf(FILE,"The added point in projective coords is:\n"); 
@@ -187,7 +192,7 @@ int main() {
 	MEASURE_TIME({secp256k1add(&GGGj, &G, &GG);});
 	fprintf(FILE,"CPU-cycles for a single point-addition is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
-	secp256k1addjacobian(&GGj, &Gj, &GGj);
+	secp256k1addjacobian(&GGj, &Gj, &inf);
 	fprintf(FILE,"The (jacobian) added point in projective coords is:\n"); 
 	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
 	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
