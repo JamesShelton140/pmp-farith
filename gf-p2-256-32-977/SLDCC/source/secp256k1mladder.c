@@ -80,7 +80,7 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
         swap = mask & n->l[limb];
         
         // gfp25632977readbit(&bit, n, limb);
-        printf("\n\n\nSwap: %u\n\n",swap);
+        printf("\n\n\nSwap: %llu\n\n",swap);
         if (swap == 0) {
         	// R1 <- 2R1 + R0
             secp256k1doublejacobian(&R_temp, &R1);
