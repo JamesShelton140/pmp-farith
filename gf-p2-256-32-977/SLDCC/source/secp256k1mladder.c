@@ -66,8 +66,6 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
 	// Set R0, R1 = P
     R0 = (gej_secp256k1){P->x,P->y,1,P->infinity};
     R1 = (gej_secp256k1){P->x,P->y,1,P->infinity};
-    printf("R0.x: "); print_felem(&R0.x);
-    printf("R1.x: "); print_felem(&R1.x);
     
     printf("\n\n\nstarting loop\n\n\n");
     int i, bit, limb;
@@ -80,7 +78,7 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
         swap = mask & n->l[limb];
         
         // gfp25632977readbit(&bit, n, limb);
-        printf("\n\n\nSwap: %llu\n\n",swap);
+        
         if (swap == 0) {
         	// R1 <- 2R1 + R0
             secp256k1doublejacobian(&R_temp, &R1);
@@ -90,8 +88,18 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
             secp256k1doublejacobian(&R_temp, &R0);
             secp256k1addjacobian(&R0, &R_temp, &R1);
         }
-        printf("R0.x: "); print_felem(&R0.x);
-        printf("R1.x: "); print_felem(&R1.x);
+
+        if(swap != 0) {
+            printf("\n\n\ni: %u\n\n",i);
+            printf("limb: %u\n\n",limb);
+            printf("bit: %u\n\n",bit);
+            printf("l[limb]: %16llX\n\n",n->l[limb]);
+            printf("mask: %16llX\n\n",mask);
+            printf("Swap: %16llX\n\n",swap);
+            printf("R0.x: "); print_felem(&R0.x);
+            printf("R1.x: "); print_felem(&R1.x);
+        }
+        
     }
     
     // Set nP = R0
