@@ -242,8 +242,31 @@ int main() {
 	x = (gfe_p25632977){0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
 	y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
 	G = (ge_secp256k1){x, y, 0};
-	gfe_p25632977 n = {123456789,0,0,0};
+	gfe_p25632977 n = {3,0,0,0};
+	gfe_p25632977 n4 = {4,0,0,0};
+	gfe_p25632977 n9 = {123456789,0,0,0};
 	gfe_p25632977 n256 = {0xd9fc93edc761ac56,0x1887f51f41819936,0x68f6316383915053,0xd5211422e842c390};
+
+	secp256k1scalermult(&Gj, &n, &G);
+
+	secp256k1_ge_from_gej(&G, &Gj);
+	fprintf(FILE,"The point [n]G in affine coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&G.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&G.y);
+
+	secp256k1scalermult(&Gj, &n4, &G);
+
+	secp256k1_ge_from_gej(&G, &Gj);
+	fprintf(FILE,"The point [n]G in affine coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&G.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&G.y);
+
+	secp256k1scalermult(&Gj, &n9, &G);
+
+	secp256k1_ge_from_gej(&G, &Gj);
+	fprintf(FILE,"The point [n]G in affine coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&G.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&G.y);
 
 	secp256k1scalermult(&Gj, &n256, &G);
 
