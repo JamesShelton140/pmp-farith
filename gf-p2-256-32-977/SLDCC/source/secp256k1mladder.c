@@ -142,7 +142,7 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
     gej_secp256k1 R0, R1, R_temp;
 
 	// Set R0 = 0, R1 = P
-    R0 = (gej_secp256k1){(uint64)0,(uint64)1,(uint64)0,(uint64)1};
+    R0 = (gej_secp256k1){(gfe_p25632977){0,0,0,0},(gfe_p25632977){1,0,0,0},(gfe_p25632977){0,0,0,0},1};
     R1 = (gej_secp256k1){P->x,P->y,1,P->infinity};
     
     int i, bit, limb;
