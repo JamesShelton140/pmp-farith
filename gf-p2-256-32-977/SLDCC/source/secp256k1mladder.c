@@ -162,6 +162,9 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
             secp256k1addjacobian(&R1, &R_temp, &R0);
         } else {
         	// R0 <- 2R0 + R1
+            printf("\n\n\ni: %u\n\n",i);
+            printf("R0.x: "); print_felem(&R0.x);
+            printf("R1.x: "); print_felem(&R1.x);
             secp256k1doublejacobian(&R_temp, &R0);
             secp256k1addjacobian(&R0, &R_temp, &R1);
         }
