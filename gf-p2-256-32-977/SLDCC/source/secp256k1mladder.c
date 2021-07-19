@@ -74,7 +74,7 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
     	// select bit at position i
         limb = i/64;
         bit = i%64;
-        mask = 1 << bit;
+        mask = (uint64)1 << bit;
         swap = mask & n->l[limb];
         
         // gfp25632977readbit(&bit, n, limb);
