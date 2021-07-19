@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 void print_felem(const gfe_p25632977 *);
+void rewriten(gfe_p25632977 *, const gfe_p25632977 *);
 
 /*
 * Elliptic curve scalar multiplication using basic Montgomery ladder
@@ -62,6 +63,9 @@ void print_felem(const gfe_p25632977 *);
 
 void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_secp256k1 *P) {
     gej_secp256k1 R0, R1, R_temp;
+    gfe_p25632977 rn;
+
+    rewriten(&rn, n);
 
 	// Set R0, R1 = P
     R0 = (gej_secp256k1){P->x,P->y,1,P->infinity};
@@ -74,7 +78,7 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
         limb = i/64;
         bit = i%64;
         mask = (uint64)1 << bit;
-        swap = mask & n->l[limb];
+        swap = mask & rn.l[limb];
         
         // gfp25632977readbit(&bit, n, limb);
         
@@ -92,7 +96,7 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
         //     printf("\n\n\ni: %u\n\n",i);
         //     printf("limb: %u\n\n",limb);
         //     printf("bit: %u\n\n",bit);
-        //     printf("l[limb]: %16llX\n\n",n->l[limb]);
+        //     printf("l[limb]: %16llX\n\n",rn.l[limb]);
         //     printf("mask: %16llX\n\n",mask);
         //     printf("Swap: %16llX\n\n",swap);
         //     printf("R0.x: "); print_felem(&R0.x);
@@ -107,6 +111,17 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
     nP->z = R0.z;
     nP->infinity = R0.infinity;
 
+}
+
+void rewriten(gfe_p25632977 *rn, const gfe_p25632977 *n) {
+    gfe_p25632977 n1, n2, n3, n4;
+
+    // rn = 2 * ((n-1)/2 mod q) + 1
+    gfp25632977sub(&n1, n, &(gfe_p25632977){1,0,0,0});
+    gfp25632977mul(&n2, &n1, &twoinv);
+    // gfp25632977makeunique(&n3, &n2);
+    gfp25632977add(&n4, &n2, &n2);
+    gfp25632977add(&rn, &n4, &(gfe_p25632977){1,0,0,0});
 }
 
 void print_felem(const gfe_p25632977 *e){

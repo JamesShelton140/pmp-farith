@@ -243,10 +243,9 @@ int main() {
 	y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
 	G = (ge_secp256k1){x, y, 0};
 	gfe_p25632977 n = {123456789,0,0,0};
-	gfe_p25632977 n2 = {0xd9fc93edc761ac56,0x1887f51f41819936,0x68f6316383915053,0xd5211422e842c390};
-	   
+	gfe_p25632977 n256 = {0xd9fc93edc761ac56,0x1887f51f41819936,0x68f6316383915053,0xd5211422e842c390};
 
-	secp256k1scalermult(&Gj, &n, &G);
+	secp256k1scalermult(&Gj, &n256, &G);
 
 	secp256k1_ge_from_gej(&G, &Gj);
 	fprintf(FILE,"The point [n]G in affine coords is:\n"); 
