@@ -211,6 +211,18 @@ int main() {
 	z = (gfe_p25632977){0,0,0,0};
 	inf = (gej_secp256k1){x, y, z, 1};
 
+	fprintf(FILE,"The point G in projective coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&Gj.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&Gj.y);
+	fprintf(FILE,"z:\t\t"); print_elem(&Gj.z);
+	fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",Gj.infinity);
+
+	fprintf(FILE,"The point inf in projective coords is:\n"); 
+	fprintf(FILE,"x:\t\t"); print_elem(&inf.x);
+	fprintf(FILE,"y:\t\t"); print_elem(&inf.y);
+	fprintf(FILE,"z:\t\t"); print_elem(&inf.z);
+	fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",inf.infinity);
+
 	secp256k1addjacobian(&GGj, &Gj, &inf);
 	fprintf(FILE,"The (jacobian) added point in projective coords is:\n"); 
 	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);

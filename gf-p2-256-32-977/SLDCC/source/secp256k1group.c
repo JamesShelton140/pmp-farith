@@ -4,11 +4,10 @@
 void secp256k1_ge_from_gej(ge_secp256k1 *p, gej_secp256k1 *pj) {
     gfe_p25632977 z1, z2, z3;
 
-    if (pj->infinity) {
-        pj->x = (gfe_p25632977) {0,0,0,0};
-        pj->y = (gfe_p25632977) {1,0,0,0};
-        pj->z = (gfe_p25632977) {0,0,0,0};
-        pj->infinity = 1;
+    if (pj->infinity == 1) {
+        p->x = (gfe_p25632977) {0,0,0,0};
+        p->y = (gfe_p25632977) {1,0,0,0};
+        p->infinity = 1;
         return;
     }
 
