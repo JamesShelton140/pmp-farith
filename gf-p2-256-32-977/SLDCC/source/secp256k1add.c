@@ -95,6 +95,23 @@ void secp256k1addjacobian(gej_secp256k1 *pq, const gej_secp256k1 *p, const gej_s
     gfp25632977sub(&lastl, &l9l6, &l8lll3);
     gfp25632977mul(&pq->y, &lastl, &twoinv);
 
+    // Set pq = q if p = 0
+    if (p->infinity == 1) {
+        pq->x = q->x;
+        pq->y = q->y;
+        pq->z = q->z;
+        pq->infinity = q->infinity;
+    }
+
+    // Set pq = p if q = 0
+    if (q->infinity == 1) {
+        pq->x = p->x;
+        pq->y = p->y;
+        pq->z = p->z;
+        pq->infinity = p->infinity;
+    }
+
+    // Set point at infinity indicator if pq.z == 0
     if(pq->z.l[0] == 0 && pq->z.l[1] == 0 && pq->z.l[2] == 0 && pq->z.l[3] == 0) {
         pq->infinity = 1;
     } else {
