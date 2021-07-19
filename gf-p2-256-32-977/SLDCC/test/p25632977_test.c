@@ -60,66 +60,66 @@ int main() {
 	//gfe_p25632977 e = {2,0,2,0};
 	//gfe_p25632977 e = {3,2,5,5};
 
-	gfe_p25632977 einv;
+	// gfe_p25632977 einv;
 	
-	fprintf(FILE,"\nThe field element is:\t\t"); print_elem(&e);  
-	gfp25632977inv(&einv,&e);
-	fprintf(FILE,"The found inverse is:\t\t"); print_elem(&einv);  
+	// fprintf(FILE,"\nThe field element is:\t\t"); print_elem(&e);  
+	// gfp25632977inv(&einv,&e);
+	// fprintf(FILE,"The found inverse is:\t\t"); print_elem(&einv);  
 
-	gfe_p25632977 t;
-	gfp25632977mul(&t,&e,&einv); gfp25632977makeunique(&t);
-	fprintf(FILE,"The cross check value is:\t"); print_elem(&t);
+	// gfe_p25632977 t;
+	// gfp25632977mul(&t,&e,&einv); gfp25632977makeunique(&t);
+	// fprintf(FILE,"The cross check value is:\t"); print_elem(&t);
 
-	gfe_p25632977 ne;
-	gfp25632977negate(&ne, &e);
-	fprintf(FILE,"The found negation is:\t\t"); print_elem(&ne);
+	// gfe_p25632977 ne;
+	// gfp25632977negate(&ne, &e);
+	// fprintf(FILE,"The found negation is:\t\t"); print_elem(&ne);
 
 	gfe_p25632977 z;
-	gfp25632977add(&z, &ne, &e); gfp25632977makeunique(&z);
-	fprintf(FILE,"The cross check value is:\t"); print_elem(&z);
+	// gfp25632977add(&z, &ne, &e); gfp25632977makeunique(&z);
+	// fprintf(FILE,"The cross check value is:\t"); print_elem(&z);
 
-	gfp25632977makeunique(&ne);
-	fprintf(FILE,"The reduced negation is:\t\t"); print_elem(&ne);
-	gfp25632977add(&z, &ne, &e); gfp25632977makeunique(&z);
-	fprintf(FILE,"The cross check value for reduced is:\t"); print_elem(&z);
+	// gfp25632977makeunique(&ne);
+	// fprintf(FILE,"The reduced negation is:\t\t"); print_elem(&ne);
+	// gfp25632977add(&z, &ne, &e); gfp25632977makeunique(&z);
+	// fprintf(FILE,"The cross check value for reduced is:\t"); print_elem(&z);
 
-	// Test affine point double algorithm
+	// // Test affine point double algorithm
 	gfe_p25632977 x = {0x59f2815b16f81798,0x029bfcdb2dce28d9,0x55a06295ce870b07,0x79be667ef9dcbbac};
 	gfe_p25632977 y = {0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
 	ge_secp256k1 G = {x, y, 0};
 
-	fprintf(FILE,"The point is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&G.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&G.y);
+	// fprintf(FILE,"The point is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&G.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&G.y);
 
 	gej_secp256k1 GGj;
-	secp256k1double(&GGj, &G);
-	fprintf(FILE,"The doubled point in projective coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
+	// secp256k1double(&GGj, &G);
+	// fprintf(FILE,"The doubled point in projective coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
 
 	ge_secp256k1 GG;
-	secp256k1_ge_from_gej(&GG, &GGj);
-	fprintf(FILE,"The doubled point in affine coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
+	// secp256k1_ge_from_gej(&GG, &GGj);
+	// fprintf(FILE,"The doubled point in affine coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&GG.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&GG.y);
 
-	fprintf(FILE,"Computing CPU-cycles. It will take some time. Please wait!\n\n");
-	MEASURE_TIME({gfp25632977mul(&t,&e,&e);change_input(e,t,e);});
-	fprintf(FILE,"CPU-cycles for a single field-multiplication is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
-	MEASURE_TIME({gfp25632977sqr(&t,&e);change_input(e,t,e);});
-	fprintf(FILE,"CPU-cycles for a single field-squaring is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
-	//MEASURE_TIME({gfp25632977inv(&einv,&e);change_input(e,einv,e);});
-	//fprintf(FILE,"CPU-cycles for a single field-inversion is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
-	MEASURE_TIME({gfp25632977add(&t,&e,&e);change_input(e,t,e);});
-	fprintf(FILE,"CPU-cycles for a single field-addition is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
-	MEASURE_TIME({gfp25632977sub(&t,&e,&e);change_input(e,t,e);});
-	fprintf(FILE,"CPU-cycles for a single field-subtraction is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
-	MEASURE_TIME({gfp25632977negate(&t,&e);change_input(e,t,e);});
-	fprintf(FILE,"CPU-cycles for a single field-negation is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// fprintf(FILE,"Computing CPU-cycles. It will take some time. Please wait!\n\n");
+	// MEASURE_TIME({gfp25632977mul(&t,&e,&e);change_input(e,t,e);});
+	// fprintf(FILE,"CPU-cycles for a single field-multiplication is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// MEASURE_TIME({gfp25632977sqr(&t,&e);change_input(e,t,e);});
+	// fprintf(FILE,"CPU-cycles for a single field-squaring is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// //MEASURE_TIME({gfp25632977inv(&einv,&e);change_input(e,einv,e);});
+	// //fprintf(FILE,"CPU-cycles for a single field-inversion is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// MEASURE_TIME({gfp25632977add(&t,&e,&e);change_input(e,t,e);});
+	// fprintf(FILE,"CPU-cycles for a single field-addition is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// MEASURE_TIME({gfp25632977sub(&t,&e,&e);change_input(e,t,e);});
+	// fprintf(FILE,"CPU-cycles for a single field-subtraction is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// MEASURE_TIME({gfp25632977negate(&t,&e);change_input(e,t,e);});
+	// fprintf(FILE,"CPU-cycles for a single field-negation is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
-	MEASURE_TIME({secp256k1double(&GGj, &G);});
-	fprintf(FILE,"CPU-cycles for a single point-double is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// MEASURE_TIME({secp256k1double(&GGj, &G);});
+	// fprintf(FILE,"CPU-cycles for a single point-double is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 
 	// MEASURE_TIME({secp256k1_gej_from_ge(&GGj, &G);});
 	// fprintf(FILE,"CPU-cycles for a single point-conversion to projective is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
@@ -175,66 +175,66 @@ int main() {
 	secp256k1double(&GGj, &G);
 	secp256k1_ge_from_gej(&GG, &GGj);
 
-	secp256k1add(&GGGj, &G, &GG);
-	fprintf(FILE,"The added point in projective coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&GGGj.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&GGGj.y);
+	// secp256k1add(&GGGj, &G, &GG);
+	// fprintf(FILE,"The added point in projective coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&GGGj.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&GGGj.y);
 
-	secp256k1_ge_from_gej(&GGG, &GGGj);
-	fprintf(FILE,"The added point in affine coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&GGG.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&GGG.y);
+	// secp256k1_ge_from_gej(&GGG, &GGGj);
+	// fprintf(FILE,"The added point in affine coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&GGG.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&GGG.y);
 	
-	MEASURE_TIME({secp256k1add(&GGGj, &G, &GG);});
-	fprintf(FILE,"CPU-cycles for a single point-addition is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// MEASURE_TIME({secp256k1add(&GGGj, &G, &GG);});
+	// fprintf(FILE,"CPU-cycles for a single point-addition is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 	
-	secp256k1addjacobian(&GGGj, &Gj, &GGj);
-	fprintf(FILE,"The (jacobian) added point in projective coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&GGGj.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&GGGj.y);
-	fprintf(FILE,"z:\t\t"); print_elem(&GGGj.z);
-	fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",GGGj.infinity);
+	// secp256k1addjacobian(&GGGj, &Gj, &GGj);
+	// fprintf(FILE,"The (jacobian) added point in projective coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&GGGj.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&GGGj.y);
+	// fprintf(FILE,"z:\t\t"); print_elem(&GGGj.z);
+	// fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",GGGj.infinity);
 
-	secp256k1_ge_from_gej(&GGG, &GGGj);
-	fprintf(FILE,"The (jacobian) added point in affine coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&GGG.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&GGG.y);
-	fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",GGG.infinity);
+	// secp256k1_ge_from_gej(&GGG, &GGGj);
+	// fprintf(FILE,"The (jacobian) added point in affine coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&GGG.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&GGG.y);
+	// fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",GGG.infinity);
 	
-	MEASURE_TIME({secp256k1addjacobian(&GGj, &Gj, &GGj);});
-	fprintf(FILE,"CPU-cycles for a single point-addition (jacobian) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
+	// MEASURE_TIME({secp256k1addjacobian(&GGj, &Gj, &GGj);});
+	// fprintf(FILE,"CPU-cycles for a single point-addition (jacobian) is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
 
-	fprintf(FILE,"\n Test addition of infinity \n\n");
-	gej_secp256k1 inf;
-	x = (gfe_p25632977){0,0,0,0};
-	y = (gfe_p25632977){1,0,0,0};
-	z = (gfe_p25632977){0,0,0,0};
-	inf = (gej_secp256k1){x, y, z, 1};
+	// fprintf(FILE,"\n Test addition of infinity \n\n");
+	// gej_secp256k1 inf;
+	// x = (gfe_p25632977){0,0,0,0};
+	// y = (gfe_p25632977){1,0,0,0};
+	// z = (gfe_p25632977){0,0,0,0};
+	// inf = (gej_secp256k1){x, y, z, 1};
 
-	fprintf(FILE,"The point G in projective coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&Gj.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&Gj.y);
-	fprintf(FILE,"z:\t\t"); print_elem(&Gj.z);
-	fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",Gj.infinity);
+	// fprintf(FILE,"The point G in projective coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&Gj.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&Gj.y);
+	// fprintf(FILE,"z:\t\t"); print_elem(&Gj.z);
+	// fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",Gj.infinity);
 
-	fprintf(FILE,"The point inf in projective coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&inf.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&inf.y);
-	fprintf(FILE,"z:\t\t"); print_elem(&inf.z);
-	fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",inf.infinity);
+	// fprintf(FILE,"The point inf in projective coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&inf.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&inf.y);
+	// fprintf(FILE,"z:\t\t"); print_elem(&inf.z);
+	// fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",inf.infinity);
 
-	secp256k1addjacobian(&GGj, &Gj, &inf);
-	fprintf(FILE,"The (jacobian) added point in projective coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
-	fprintf(FILE,"z:\t\t"); print_elem(&GGj.z);
-	fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",GGj.infinity);
+	// secp256k1addjacobian(&GGj, &Gj, &inf);
+	// fprintf(FILE,"The (jacobian) added point in projective coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&GGj.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&GGj.y);
+	// fprintf(FILE,"z:\t\t"); print_elem(&GGj.z);
+	// fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",GGj.infinity);
 
-	secp256k1_ge_from_gej(&GGG, &GGj);
-	fprintf(FILE,"The (jacobian) added point in affine coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&GGG.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&GGG.y);
-	fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",GGG.infinity);
+	// secp256k1_ge_from_gej(&GGG, &GGj);
+	// fprintf(FILE,"The (jacobian) added point in affine coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&GGG.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&GGG.y);
+	// fprintf(FILE,"inf:\t\t"); fprintf(FILE,"%d \n\n",GGG.infinity);
 
 	fprintf(FILE,"\n Test point multiplication \n\n");
 

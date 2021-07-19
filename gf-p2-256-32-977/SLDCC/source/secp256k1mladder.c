@@ -161,10 +161,38 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
             if(i == 0 || i == 1) {
                 printf("\n\n\ni (swap 0): %u\n\n",i);
                 printf("R0.x: "); print_felem(&R0.x);
+                printf("R0.y: "); print_felem(&R0.y);
+                printf("R0.z: "); print_felem(&R0.z);
+                printf("R0.inf: "); print_felem(&R0.infinity);
                 printf("R1.x: "); print_felem(&R1.x);
+                printf("R1.y: "); print_felem(&R1.y);
+                printf("R1.z: "); print_felem(&R1.z);
+                printf("R1.inf: "); print_felem(&R1.infinity);
             }
             secp256k1doublejacobian(&R_temp, &R1);
+            if(i == 0 || i == 1) {
+                printf("\n\n After Double:\n\n");
+                printf("R0.x: "); print_felem(&R0.x);
+                printf("R0.y: "); print_felem(&R0.y);
+                printf("R0.z: "); print_felem(&R0.z);
+                printf("R0.inf: "); print_felem(&R0.infinity);
+                printf("R1.x: "); print_felem(&R1.x);
+                printf("R1.y: "); print_felem(&R1.y);
+                printf("R1.z: "); print_felem(&R1.z);
+                printf("R1.inf: "); print_felem(&R1.infinity);
+            }
             secp256k1addjacobian(&R1, &R_temp, &R0);
+            if(i == 0 || i == 1) {
+                printf("\n\n After Add:\n\n");
+                printf("R0.x: "); print_felem(&R0.x);
+                printf("R0.y: "); print_felem(&R0.y);
+                printf("R0.z: "); print_felem(&R0.z);
+                printf("R0.inf: "); print_felem(&R0.infinity);
+                printf("R1.x: "); print_felem(&R1.x);
+                printf("R1.y: "); print_felem(&R1.y);
+                printf("R1.z: "); print_felem(&R1.z);
+                printf("R1.inf: "); print_felem(&R1.infinity);
+            }
         } else {
         	// R0 <- 2R0 + R1
             printf("\n\n\ni: %u\n\n",i);
@@ -174,11 +202,6 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
             secp256k1addjacobian(&R0, &R_temp, &R1);
         }
 
-        if(i == 0 || i == 1) {
-            printf("\n\n\ni: %u\n\n",i);
-            printf("R0.x: "); print_felem(&R0.x);
-            printf("R1.x: "); print_felem(&R1.x);
-        }
         if(swap != 0) {
             printf("\n\n\ni: %u\n\n",i);
             printf("limb: %u\n\n",limb);
