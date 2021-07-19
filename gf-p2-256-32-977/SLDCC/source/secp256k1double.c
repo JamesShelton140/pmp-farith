@@ -67,6 +67,15 @@ void secp256k1doublejacobian(gej_secp256k1 *pp, const gej_secp256k1 *p) {
     gfp25632977mul(&yp, &l1, &l2mx);
     gfp25632977sub(&pp->y, &yp, &l3);
 
+    // Set pp = p if p = 0
+    if (p->infinity == 1) {
+        pp->x = (gfe_p25632977){0,0,0,0};
+        pp->y = (gfe_p25632977){1,0,0,0};
+        pp->z = (gfe_p25632977){0,0,0,0};
+        pp->infinity = 1;
+    }
+
+
     if(pp->z.l[0] == 0 && pp->z.l[1] == 0 && pp->z.l[2] == 0 && pp->z.l[3] == 0) {
         pp->infinity = 1;
     } else {
