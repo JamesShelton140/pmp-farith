@@ -166,16 +166,16 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
             secp256k1addjacobian(&R0, &R_temp, &R1);
         }
 
-        // if(swap != 0) {
-        //     printf("\n\n\ni: %u\n\n",i);
-        //     printf("limb: %u\n\n",limb);
-        //     printf("bit: %u\n\n",bit);
-        //     printf("l[limb]: %16llX\n\n",n->l[limb]);
-        //     printf("mask: %16llX\n\n",mask);
-        //     printf("Swap: %16llX\n\n",swap);
-        //     printf("R0.x: "); print_felem(&R0.x);
-        //     printf("R1.x: "); print_felem(&R1.x);
-        // }
+        if(swap != 0) {
+            printf("\n\n\ni: %u\n\n",i);
+            printf("limb: %u\n\n",limb);
+            printf("bit: %u\n\n",bit);
+            printf("l[limb]: %16llX\n\n",n->l[limb]);
+            printf("mask: %16llX\n\n",mask);
+            printf("Swap: %16llX\n\n",swap);
+            printf("R0.x: "); print_felem(&R0.x);
+            printf("R1.x: "); print_felem(&R1.x);
+        }
         
     }
     
