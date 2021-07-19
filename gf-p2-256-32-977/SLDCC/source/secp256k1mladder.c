@@ -119,9 +119,9 @@ void rewriten(gfe_p25632977 *rn, const gfe_p25632977 *n) {
     // rn = 2 * ((n-1)/2 mod q) + 1
     gfp25632977sub(&n1, n, &(gfe_p25632977){1,0,0,0});
     printf("n1:\t\t");print_felem(&n1);
-    
+
     gfp25632977mul(&n2, &n1, &twoinv);
-    printf("n1:\t\t");print_felem(&n1);
+    printf("n2:\t\t");print_felem(&n2);
 
     gfp25632977makeunique(&n2);
     printf("n2:\t\t");print_felem(&n2);
