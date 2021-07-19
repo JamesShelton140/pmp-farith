@@ -243,6 +243,10 @@ int main() {
 	y = (gfe_p25632977){0x9c47d08ffb10d4b8,0xfd17b448a6855419,0x5da4fbfc0e1108a8,0x483ada7726a3c465};
 	G = (ge_secp256k1){x, y, 0};
 	gfe_p25632977 n = {3,0,0,0};
+	gfe_p25632977 n2 = {0x0000000000000003,0,0,0};
+
+	fprintf(FILE,"n:\t\t"); print_elem(&n);
+	fprintf(FILE,"n2:\t\t"); print_elem(&n2);
 
 	secp256k1scalermult(&Gj, &n, &G);
 
