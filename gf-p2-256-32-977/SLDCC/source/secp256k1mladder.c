@@ -57,7 +57,7 @@ void rewriten(gfe_p25632977 *, const gfe_p25632977 *);
 // }
 
 /*
-* Elliptic curve scalar multiplication using basic Joye ladder
+* Elliptic curve scalar multiplication using basic Joye ladder starting from P
 * (Spelling of name will be corrected)
 */
 
@@ -134,7 +134,7 @@ void rewriten(gfe_p25632977 *rn, const gfe_p25632977 *n) {
 }
 
 /*
-* Elliptic curve scalar multiplication using basic Joye ladder
+* Elliptic curve scalar multiplication using basic Joye ladder starting from zero
 * (Spelling of name will be corrected)
 */
 
@@ -158,60 +158,24 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
         
         if (swap == 0) {
         	// R1 <- 2R1 + R0
-            if(i == 0 || i == 1) {
-                printf("\n\n\ni (swap 0): %u\n\n",i);
-                printf("R0.x: "); print_felem(&R0.x);
-                printf("R0.y: "); print_felem(&R0.y);
-                printf("R0.z: "); print_felem(&R0.z);
-                printf("R0.inf: %u", R0.infinity);
-                printf("R1.x: "); print_felem(&R1.x);
-                printf("R1.y: "); print_felem(&R1.y);
-                printf("R1.z: "); print_felem(&R1.z);
-                printf("R1.inf: %u", R1.infinity);
-            }
             secp256k1doublejacobian(&R_temp, &R1);
-            if(i == 0 || i == 1) {
-                printf("\n\n After Double:\n\n");
-                printf("R0.x: "); print_felem(&R0.x);
-                printf("R0.y: "); print_felem(&R0.y);
-                printf("R0.z: "); print_felem(&R0.z);
-                printf("R0.inf: %u", R0.infinity);
-                printf("R1.x: "); print_felem(&R1.x);
-                printf("R1.y: "); print_felem(&R1.y);
-                printf("R1.z: "); print_felem(&R1.z);
-                printf("R1.inf: %u", R1.infinity);
-            }
             secp256k1addjacobian(&R1, &R_temp, &R0);
-            if(i == 0 || i == 1) {
-                printf("\n\n After Add:\n\n");
-                printf("R0.x: "); print_felem(&R0.x);
-                printf("R0.y: "); print_felem(&R0.y);
-                printf("R0.z: "); print_felem(&R0.z);
-                printf("R0.inf: %u", R0.infinity);
-                printf("R1.x: "); print_felem(&R1.x);
-                printf("R1.y: "); print_felem(&R1.y);
-                printf("R1.z: "); print_felem(&R1.z);
-                printf("R1.inf: %u", R1.infinity);
-            }
         } else {
         	// R0 <- 2R0 + R1
-            printf("\n\n\ni: %u\n\n",i);
-            printf("R0.x: "); print_felem(&R0.x);
-            printf("R1.x: "); print_felem(&R1.x);
             secp256k1doublejacobian(&R_temp, &R0);
             secp256k1addjacobian(&R0, &R_temp, &R1);
         }
 
-        if(swap != 0) {
-            printf("\n\n\ni: %u\n\n",i);
-            printf("limb: %u\n\n",limb);
-            printf("bit: %u\n\n",bit);
-            printf("l[limb]: %16llX\n\n",n->l[limb]);
-            printf("mask: %16llX\n\n",mask);
-            printf("Swap: %16llX\n\n",swap);
-            printf("R0.x: "); print_felem(&R0.x);
-            printf("R1.x: "); print_felem(&R1.x);
-        }
+        // if(swap != 0) {
+        //     printf("\n\n\ni: %u\n\n",i);
+        //     printf("limb: %u\n\n",limb);
+        //     printf("bit: %u\n\n",bit);
+        //     printf("l[limb]: %16llX\n\n",n->l[limb]);
+        //     printf("mask: %16llX\n\n",mask);
+        //     printf("Swap: %16llX\n\n",swap);
+        //     printf("R0.x: "); print_felem(&R0.x);
+        //     printf("R1.x: "); print_felem(&R1.x);
+        // }
         
     }
     
