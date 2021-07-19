@@ -119,8 +119,8 @@ void rewriten(gfe_p25632977 *rn, const gfe_p25632977 *n) {
     // rn = 2 * ((n-1)/2 mod q) + 1
     gfp25632977sub(&n1, n, &(gfe_p25632977){1,0,0,0});
     gfp25632977mul(&n2, &n1, &twoinv);
-    gfp25632977makeunique(&n3, &n2);
-    gfp25632977add(&n4, &n3, &n3);
+    gfp25632977makeunique(&n2);
+    gfp25632977add(&n4, &n2, &n2);
     gfp25632977add(rn, &n4, &(gfe_p25632977){1,0,0,0});
 }
 
