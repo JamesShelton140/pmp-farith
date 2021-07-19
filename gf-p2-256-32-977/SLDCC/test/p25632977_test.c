@@ -262,21 +262,21 @@ int main() {
 	fprintf(FILE,"x:\t\t"); print_elem(&G.x);
 	fprintf(FILE,"y:\t\t"); print_elem(&G.y);
 
-	G = (ge_secp256k1){x, y, 0};
-	secp256k1scalermult(&Gj, &n9, &G);
+	// G = (ge_secp256k1){x, y, 0};
+	// secp256k1scalermult(&Gj, &n9, &G);
 
-	secp256k1_ge_from_gej(&G, &Gj);
-	fprintf(FILE,"The point [123456789]G in affine coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&G.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&G.y);
+	// secp256k1_ge_from_gej(&G, &Gj);
+	// fprintf(FILE,"The point [123456789]G in affine coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&G.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&G.y);
 
-	G = (ge_secp256k1){x, y, 0};
-	secp256k1scalermult(&Gj, &n256, &G);
+	// G = (ge_secp256k1){x, y, 0};
+	// secp256k1scalermult(&Gj, &n256, &G);
 
-	secp256k1_ge_from_gej(&G, &Gj);
-	fprintf(FILE,"The point [n256]G in affine coords is:\n"); 
-	fprintf(FILE,"x:\t\t"); print_elem(&G.x);
-	fprintf(FILE,"y:\t\t"); print_elem(&G.y);
+	// secp256k1_ge_from_gej(&G, &Gj);
+	// fprintf(FILE,"The point [n256]G in affine coords is:\n"); 
+	// fprintf(FILE,"x:\t\t"); print_elem(&G.x);
+	// fprintf(FILE,"y:\t\t"); print_elem(&G.y);
 
 	// MEASURE_TIME({secp256k1scalermult(&Gj, &n, &G);});
 	// fprintf(FILE,"CPU-cycles for a single point multiplication is:%6.0lf\n\n", ceil(((get_median())/(double)(N))));
