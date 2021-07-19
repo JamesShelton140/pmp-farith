@@ -163,11 +163,11 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
                 printf("R0.x: "); print_felem(&R0.x);
                 printf("R0.y: "); print_felem(&R0.y);
                 printf("R0.z: "); print_felem(&R0.z);
-                printf("R0.inf: "); print_felem(&R0.infinity);
+                printf("R0.inf: %u", R0.infinity);
                 printf("R1.x: "); print_felem(&R1.x);
                 printf("R1.y: "); print_felem(&R1.y);
                 printf("R1.z: "); print_felem(&R1.z);
-                printf("R1.inf: "); print_felem(&R1.infinity);
+                printf("R1.inf: %u", R1.infinity);
             }
             secp256k1doublejacobian(&R_temp, &R1);
             if(i == 0 || i == 1) {
@@ -175,11 +175,11 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
                 printf("R0.x: "); print_felem(&R0.x);
                 printf("R0.y: "); print_felem(&R0.y);
                 printf("R0.z: "); print_felem(&R0.z);
-                printf("R0.inf: "); print_felem(&R0.infinity);
+                printf("R0.inf: %u", R0.infinity);
                 printf("R1.x: "); print_felem(&R1.x);
                 printf("R1.y: "); print_felem(&R1.y);
                 printf("R1.z: "); print_felem(&R1.z);
-                printf("R1.inf: "); print_felem(&R1.infinity);
+                printf("R1.inf: %u", R1.infinity);
             }
             secp256k1addjacobian(&R1, &R_temp, &R0);
             if(i == 0 || i == 1) {
@@ -187,11 +187,11 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
                 printf("R0.x: "); print_felem(&R0.x);
                 printf("R0.y: "); print_felem(&R0.y);
                 printf("R0.z: "); print_felem(&R0.z);
-                printf("R0.inf: "); print_felem(&R0.infinity);
+                printf("R0.inf: %u", R0.infinity);
                 printf("R1.x: "); print_felem(&R1.x);
                 printf("R1.y: "); print_felem(&R1.y);
                 printf("R1.z: "); print_felem(&R1.z);
-                printf("R1.inf: "); print_felem(&R1.infinity);
+                printf("R1.inf: %u", R1.infinity);
             }
         } else {
         	// R0 <- 2R0 + R1
