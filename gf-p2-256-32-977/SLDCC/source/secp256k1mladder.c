@@ -66,8 +66,8 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
 	// Set R0, R1 = P
     R0 = (gej_secp256k1){P->x,P->y,1,P->infinity};
     R1 = (gej_secp256k1){P->x,P->y,1,P->infinity};
-    printf("R0: "); print_felem(&R0);
-    printf("R1: "); print_felem(&R1);
+    printf("R0.x: "); print_felem(&R0.x);
+    printf("R1.x: "); print_felem(&R1.x);
     
     printf("\n\n\nstarting loop\n\n\n");
     int i, bit, limb;
@@ -90,8 +90,8 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
             secp256k1doublejacobian(&R_temp, &R0);
             secp256k1addjacobian(&R0, &R_temp, &R1);
         }
-        printf("R0: "); print_felem(&R0);
-        printf("R1: "); print_felem(&R1);
+        printf("R0.x: "); print_felem(&R0.x);
+        printf("R1.x: "); print_felem(&R1.x);
     }
     
     // Set nP = R0
