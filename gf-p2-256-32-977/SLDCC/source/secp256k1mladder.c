@@ -114,14 +114,23 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
 }
 
 void rewriten(gfe_p25632977 *rn, const gfe_p25632977 *n) {
-    gfe_p25632977 n1, n2, n3, n4;
+    gfe_p25632977 n1, n2, n3;
 
     // rn = 2 * ((n-1)/2 mod q) + 1
     gfp25632977sub(&n1, n, &(gfe_p25632977){1,0,0,0});
+    printf("n1:\t\t");print_felem(&n1);
+    
     gfp25632977mul(&n2, &n1, &twoinv);
+    printf("n1:\t\t");print_felem(&n1);
+
     gfp25632977makeunique(&n2);
-    gfp25632977add(&n4, &n2, &n2);
-    gfp25632977add(rn, &n4, &(gfe_p25632977){1,0,0,0});
+    printf("n2:\t\t");print_felem(&n2);
+
+    gfp25632977add(&n3, &n2, &n2);
+    printf("n3:\t\t");print_felem(&n3);
+
+    gfp25632977add(rn, &n3, &(gfe_p25632977){1,0,0,0});
+    printf("rn:\t\t");print_felem(rn);
 }
 
 void print_felem(const gfe_p25632977 *e){
