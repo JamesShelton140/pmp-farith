@@ -149,14 +149,15 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
     uint64 mask, swap;
     for (i = 0; i <= 255; i++) {
     	// select bit at position i
-        limb = i/64;
-        bit = i%64;
-        mask = (uint64)1 << bit;
-        swap = mask & n->l[limb];
+        // limb = i/64;
+        // bit = i%64;
+        // mask = (uint64)1 << bit;
+        // swap = mask & n->l[limb];
         
-        // gfp25632977readbit(&bit, n, limb);
+        gfp25632977readbit(&bit, n, limb);
         
-        if (swap == 0) {
+        // if (swap == 0) {
+        if (bit == 0) {
         	// R1 <- 2R1 + R0
             secp256k1doublejacobian(&R_temp, &R1);
             secp256k1addjacobian(&R1, &R_temp, &R0);
