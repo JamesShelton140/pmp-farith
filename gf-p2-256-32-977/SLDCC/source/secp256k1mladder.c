@@ -4,6 +4,7 @@
 
 void print_felem(const gfe_p25632977 *);
 void rewriten(gfe_p25632977 *, const gfe_p25632977 *);
+void readbit(uint64, uint64, int, int, int, gfe_p25632977 *);
 
 /*
 * Elliptic curve scalar multiplication using basic Montgomery ladder
@@ -186,6 +187,14 @@ void secp256k1scalermult(gej_secp256k1 *nP, const gfe_p25632977 *n, const ge_sec
     nP->z = R0.z;
     nP->infinity = R0.infinity;
 
+}
+
+void readbit(uint64 swap, uint64 mask, int i, int bit, int limb, gfe_p25632977 *n) {
+    // select bit at position i
+    limb = i/64;
+    bit = i%64;
+    mask = (uint64)1 << bit;
+    swap = mask & n->l[limb];
 }
 
 void print_felem(const gfe_p25632977 *e){
